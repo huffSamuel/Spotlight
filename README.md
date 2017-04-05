@@ -1,7 +1,7 @@
 # Spotlight
-
-
 Spotlight is a simple .NET application to copy Microsoft Spotlight images to your My Pictures directory.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Use
 
@@ -12,10 +12,13 @@ It is recommended to create a scheduled task to run Spotlight. This will ensure 
 
 # Questions
 **Couldn't this be done with a script?**
+
 Yes.
 
 **Why didn't you just write a script?**
+
 Because I didn't want to.
 
 **Seriously though, why didn't you?**
-Because I am lazy. I wanted to keep all the Spotlight images and it was easier for me to write a .NET application to copy them for me than to write a script to do it.
+
+I wanted to keep all the Spotlight images and it was easier for me to write a .NET application to copy them for me than to write a script to do it.
