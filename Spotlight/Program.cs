@@ -30,7 +30,7 @@ namespace Spotlight
                     {
                         string destination = Path.Combine(myPictures, "SpotlightPictures", Path.GetFileNameWithoutExtension(file));
                         
-                        File.Copy(file, destination + ".jpg");
+                        File.Copy(file, destination + ".jpg", true);
                     }
                 }
             }
