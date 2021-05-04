@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Spotlight
 {
@@ -12,13 +9,13 @@ namespace Spotlight
     {
         static void Main(string[] args)
         {
-            string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string myPictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            string spotlightPath = Path.Combine(appData + @"\", @"Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets");
-            string spotlightDestinationPath = Path.Combine(myPictures, "SpotlightPictures");
+            Config config = Config.Load(Assembly.GetAssembly(typeof(Program)).CodeBase);
 
-            if (!Directory.Exists(spotlightDestinationPath))
-                Directory.CreateDirectory(spotlightDestinationPath);
+            string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string spotlightPath = Path.Combine(appData, @"\", @"Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets");
+
+            if (!Directory.Exists(config.OutputDirectory))
+                Directory.CreateDirectory(config.OutputDirectory);
 
             if(Directory.Exists(spotlightPath))
             {
@@ -26,9 +23,9 @@ namespace Spotlight
                 {
                     Image image = Image.FromFile(file);
 
-                    if(image.Height >= 1080 && image.Width >= 1920)
+                    if(image.Height >= config.MinHeight && image.Width >= config.MinWidth)
                     {
-                        string destination = Path.Combine(myPictures, "SpotlightPictures", Path.GetFileNameWithoutExtension(file));
+                        string destination = Path.Combine(config.OutputDirectory, Path.GetFileNameWithoutExtension(file));
                         
                         File.Copy(file, destination + ".jpg", true);
                     }
